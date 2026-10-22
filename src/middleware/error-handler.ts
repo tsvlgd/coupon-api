@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 
 export function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
+  // express.json() rejects a body that is not valid JSON before any route
+  // runs, that is a client error, so it gets a 400 and a clear message
+  // instead of the generic 500
   if ((err as any)?.type === 'entity.parse.failed') {
     return res.status(400).json({ error: 'invalid JSON body' });
   }
