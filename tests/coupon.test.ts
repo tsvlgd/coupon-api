@@ -154,6 +154,16 @@ describe('Coupon API', () => {
       expect(res.body.error).toContain('amount');
     });
 
+    it('returns 400 for a malformed JSON body', async () => {
+      const res = await request(app)
+        .post('/coupons/apply')
+        .set('Content-Type', 'application/json')
+        .send('{"code":"ACTIVE","amount":');
+
+      expect(res.status).toBe(400);
+      expect(res.body.error).toContain('invalid JSON');
+    });
+
     it('rounds the final amount to 2 decimal places', async () => {
       await request(app)
         .post('/coupons')
