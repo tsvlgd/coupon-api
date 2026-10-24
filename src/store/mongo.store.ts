@@ -6,7 +6,7 @@ export class MongoCouponStore implements CouponStore {
   async create(input: CreateCouponInput): Promise<Coupon> {
     try {
       const doc = await CouponModel.create({
-        code: input.code.toUpperCase(),
+        code: input.code.trim().toUpperCase(),
         discountPercent: input.discountPercent,
         expiresAt: new Date(input.expiresAt)
       });
@@ -26,7 +26,7 @@ export class MongoCouponStore implements CouponStore {
   }
 
   async findByCode(code: string): Promise<Coupon | null> {
-    const doc = await CouponModel.findOne({ code: code.toUpperCase() });
+    const doc = await CouponModel.findOne({ code: code.trim().toUpperCase() });
     if (!doc) return null;
 
     return {

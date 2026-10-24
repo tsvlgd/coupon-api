@@ -5,7 +5,7 @@ export class InMemoryCouponStore implements CouponStore {
   private coupons: Map<string, Coupon> = new Map();
 
   async create(input: CreateCouponInput): Promise<Coupon> {
-    const code = input.code.toUpperCase();
+    const code = input.code.trim().toUpperCase();
 
     if (this.coupons.has(code)) {
       throw new Error('DUPLICATE_CODE');
@@ -23,7 +23,7 @@ export class InMemoryCouponStore implements CouponStore {
   }
 
   async findByCode(code: string): Promise<Coupon | null> {
-    return this.coupons.get(code.toUpperCase()) || null;
+    return this.coupons.get(code.trim().toUpperCase()) || null;
   }
 
   async findAll(): Promise<Coupon[]> {
