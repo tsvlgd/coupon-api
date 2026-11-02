@@ -1,6 +1,6 @@
 # Coupon API
 
-A small API for creating discount coupons and applying them to an order, built for the Collabroot developer intern task.
+A small API for creating discount coupons and applying them to an order.
 
 Stack: Node.js, Express, TypeScript, MongoDB (with an automatic in memory fallback so it runs with zero setup). A bonus React and Vite page for creating and listing coupons lives in `client/`. The reasoning behind each of these choices, including why Bun and Postgres were not used, is written out in [docs/decisions.md](docs/decisions.md).
 
